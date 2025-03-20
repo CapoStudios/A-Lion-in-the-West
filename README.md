@@ -1,12 +1,15 @@
 # A Lion in the West
 Western third person shooter.
 
-# Compilare
+(INSERIRE DESCRIZIONE ACCATTIVANTE)
+
+# Compilare il progetto
 Prima di importare il progetto dentro Eclipse, bisogna installare un estensione per utilizzare Gradle.
 ``` bash
 Help > Eclipse Marketplace...
 
-Nella barra di ricerca, cercate "Gradle" e installate la seconda che vi esce (quella con il logo di un elefante blu)
+Nella barra di ricerca, cercate "Gradle" e installate la seconda
+che vi esce (quella con il logo di un elefante blu)
 ```
 
 Dopo aver installato l'estensione e riavviato Eclipse, possiamo importare il progetto.
