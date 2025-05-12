@@ -50,6 +50,7 @@ public class GameScreen extends ScreenAdapter
         gameView = new GameView(world,false, 0.1f, 300f, 1f);
         gameView.getCameraController().setThirdPersonMode(thirdPersonView);
         world.getPlayer().visible = thirdPersonView;            // hide player mesh in first person
+        
         gridView = new GridView();
         physicsView  = new PhysicsView(world);
         scopeOverlay = new ScopeOverlay();

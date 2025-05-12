@@ -281,8 +281,10 @@ public class PhysicsBodyFactory implements Disposable {
         PhysicsBody body = new PhysicsBody(geom, instance);
 
         // copy position and orientation from modelInstance to body
-        collisionInstance.transform.getTranslation(position);
-        collisionInstance.transform.getRotation(q);
+        if (collisionInstance != null) {
+        	collisionInstance.transform.getTranslation(position);
+        	collisionInstance.transform.getRotation(q);        	
+        }
         body.setPosition(position);
         body.setOrientation(q);
         return body;

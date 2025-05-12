@@ -142,7 +142,7 @@ public class PlayerController extends InputAdapter  {
     }
     
 
-    private void rotateView( float deltaX, float deltaY ) {
+    private void rotateView(float deltaX, float deltaY) {
         viewingDirection.rotate(Vector3.Y, deltaX);
         
         if (Settings.invertLook)
@@ -287,7 +287,7 @@ public class PlayerController extends InputAdapter  {
         // (and in fact it causes problems due to errors building up)
         // so we don't rotate the rigid body, but we rotate the modelInstance in World.syncToPhysics()
         
-        player.scene.animationController.setAnimation("RUN", -1);
+        player.scene.animationController.setAnimation("Boh.001", -1);
     }
 
 

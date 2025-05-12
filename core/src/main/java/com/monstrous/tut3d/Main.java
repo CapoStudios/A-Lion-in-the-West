@@ -8,12 +8,12 @@ import static com.badlogic.gdx.Application.ApplicationType.Desktop;
 public class Main extends Game {
 
     public static Assets assets;
-//    private SplashScreen spl;
+    private SplashScreen splashScreen;
     
     @Override
     public void create() {
-//    	spl = new SplashScreen(this);
-//    	setScreen(spl);
+    	splashScreen = new SplashScreen(this);
+    	setScreen(splashScreen);
     	
     	Settings.supportControllers = (Gdx.app.getType() == Desktop);
 
@@ -21,11 +21,12 @@ public class Main extends Game {
         assets.finishLoading();
         
         // DEBUG
-        setScreen(new GameScreen());
+//        setScreen(new GameScreen());
     }
 
     @Override
     public void dispose() {
+    	splashScreen.dispose();
         assets.dispose();
         super.dispose();
     }

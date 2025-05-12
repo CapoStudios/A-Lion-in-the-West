@@ -54,9 +54,10 @@ public class Populator {
 //        world.spawnObject(GameObjectType.TYPE_ENEMY, "cook",  "cookProxy", CollisionShapeType.CAPSULE, true, new Vector3(-25, 1f, 25) );  // bad guy
 //        world.spawnObject(GameObjectType.TYPE_ENEMY, "cook",  "cookProxy", CollisionShapeType.CAPSULE, true, new Vector3(25, 1f, 25) );  // bad guy
 
+        
         // 1.9814761 - 1.909518 - 0.34048164
         // new Vector3(0.9814761f, 1.34048164f, 0.34048164f)
-        GameObject go = world.spawnObject(GameObjectType.TYPE_PLAYER, "GIORGIO", null, CollisionShapeType.CAPSULE, true, new Vector3(5,1,5), new Vector3(1.0814761f, 1.909518f, 0.34048164f));
+        GameObject go = world.spawnObject(GameObjectType.TYPE_PLAYER, "Armature", null, CollisionShapeType.CAPSULE, true, Vector3.Zero, new Vector3(1.0814761f, 1.909518f, 0.34048164f));
         world.setPlayer(go);
     }
 }

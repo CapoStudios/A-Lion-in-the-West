@@ -86,7 +86,7 @@ public class CameraController extends InputAdapter {
         return zoom(amountY);
     }
 
-    private boolean zoom (float amount) {
+    public boolean zoom (float amount) {
         if (amount < 0 && distance < 5f)	return false;
         if (amount > 0 && distance > 7f)	return false;
         

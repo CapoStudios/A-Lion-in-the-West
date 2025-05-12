@@ -1,5 +1,6 @@
 package com.monstrous.tut3d;
 
+//import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.g3d.ModelInstance;
@@ -31,6 +32,7 @@ public class World implements Disposable
     public final WeaponState weaponState;
     public NavMesh navMesh;
     public NavNode navNode;
+//    private GameObject cameraColliderObject;
 //    private int prevNode = -1;
     
 
@@ -46,6 +48,8 @@ public class World implements Disposable
         rayCaster = new PhysicsRayCaster(physicsWorld);
         playerController = new PlayerController(this, gameScreen);
         weaponState = new WeaponState();
+        
+//        cameraColliderObject = spawnObject(GameObjectType.TYPE_STATIC, "wall", null, CollisionShapeType.SPHERE, false, new Vector3(1,1,1), new Vector3(5,5,5));
     }
     
 
@@ -68,6 +72,7 @@ public class World implements Disposable
     public void setPlayer(GameObject player) {
         this.player = player;
         player.body.setCapsuleCharacteristics();
+//        player.scene.modelInstance.transform.setTranslation(go.body.getPosition());
         // navMesh.updateDistances(player.getPosition());
     }
 
@@ -77,15 +82,16 @@ public class World implements Disposable
     
     
 
-    public GameObject spawnObject(GameObjectType type, String name, String proxyName, CollisionShapeType shapeType, boolean resetPosition, Vector3 position){
-        Scene scene = loadNode( name, resetPosition, position );
+    public GameObject spawnObject(GameObjectType type, String name, String proxyName, CollisionShapeType shapeType, boolean resetPosition, Vector3 position)
+    {
+        Scene scene = loadNode( name, resetPosition, position);
         ModelInstance collisionInstance = scene.modelInstance;
-        if(proxyName != null) {
-            Scene proxyScene = loadNode( proxyName, resetPosition, position );
+        if (proxyName != null) {
+            Scene proxyScene = loadNode( proxyName, resetPosition, position);
             collisionInstance = proxyScene.modelInstance;
         }
         PhysicsBody body = null;
-        if(type == GameObjectType.TYPE_NAVMESH){
+        if (type == GameObjectType.TYPE_NAVMESH) {
             navMesh = NavMeshBuilder.build(scene.modelInstance);
             return null;
         }
@@ -102,7 +108,8 @@ public class World implements Disposable
     
     
     // Overloading with dimension
-    public GameObject spawnObject(GameObjectType type, String name, String proxyName, CollisionShapeType shapeType, boolean resetPosition, Vector3 position, Vector3 dimension){
+    public GameObject spawnObject(GameObjectType type, String name, String proxyName, CollisionShapeType shapeType, boolean resetPosition, Vector3 position, Vector3 dimension)
+    {
         Scene scene = loadNode( name, resetPosition, position );
         ModelInstance collisionInstance = scene.modelInstance;
         if (proxyName != null) {
@@ -162,12 +169,13 @@ public class World implements Disposable
                 Main.assets.sounds.GAME_COMPLETED.play();
             stats.levelComplete = true;
         }
+//        cameraColliderObject.body.setPosition(playerController.getCameraPosition());
         weaponState.update(deltaTime);
         playerController.update(player, deltaTime);
         physicsWorld.update(deltaTime);
         syncToPhysics();
-        for(GameObject go : gameObjects) {
-            if(go.getPosition().y < -10)        // delete objects that fell off the map
+        for (GameObject go : gameObjects) {
+            if (go.getPosition().y < -10)        // delete objects that fell off the map
                 removeObject(go);
             go.update(this, deltaTime);
         }
@@ -183,12 +191,14 @@ public class World implements Disposable
     }
 
     private void syncToPhysics() {
-        for(GameObject go : gameObjects){
-            if( go.body != null && go.body.geom.getBody() != null) {
-                if(go.type == GameObjectType.TYPE_PLAYER){
+        for (GameObject go : gameObjects) {
+            if (go.body != null && go.body.geom.getBody() != null) {
+                if (go.type == GameObjectType.TYPE_PLAYER) {
                     // use information from the player controller, since the rigid body is not rotated.
                 	player.scene.modelInstance.transform.setToRotation(Vector3.Z, playerController.getForwardDirection());
-	                player.scene.modelInstance.transform.setTranslation(go.body.getPosition());
+                	Vector3 posizione = go.body.getPosition();
+                	posizione.y -= 0.25f;
+                	player.scene.modelInstance.transform.setTranslation(posizione);
                 }
                 else if(go.type == GameObjectType.TYPE_ENEMY){
                     CookBehaviour cb = (CookBehaviour) go.behaviour;

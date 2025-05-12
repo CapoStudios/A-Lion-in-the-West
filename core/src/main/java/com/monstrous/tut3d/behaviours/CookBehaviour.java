@@ -62,6 +62,9 @@ public class CookBehaviour extends Behaviour {
             if(distance > 5f)   // move unless quite close
                 go.body.applyForce(targetDirection.scl(deltaTime * 60f * Settings.cookForce * climbFactor));
         }
+        
+        // animazioni
+        go.scene.animationController.setAnimation("Boh2", -1);
 
 
         // every so often shoot a pan

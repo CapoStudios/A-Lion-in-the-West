@@ -1,12 +1,47 @@
-[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-eclipse.project.name = appName + '-core'
-
-dependencies {
-  api "com.badlogicgames.gdx-controllers:gdx-controllers-core:$gdxControllersVersion"
-  api "com.badlogicgames.gdx:gdx:$gdxVersion"
-  api "com.github.antzGames:gdx-ode4j:master-SNAPSHOT"
-  api "com.github.mgsx-dev.gdx-gltf:gltf:$gdxGltfVersion"
-  api "de.golfgl.gdxcontrollerutils:gdx-controllerutils-mapping:$controllerMappingVersion"
-  api "de.golfgl.gdxcontrollerutils:gdx-controllerutils-scene2d:2.0.1"
-  implementation "com.badlogicgames.gdx-video:gdx-video:1.3.2-SNAPSHOT"
+buildscript {
+  repositories {
+    mavenCentral()
+    maven { url 'https://s01.oss.sonatype.org' }
+    mavenLocal()
+    google()
+    gradlePluginPortal()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+    maven { url "https://jitpack.io" }
+  }
+  dependencies {
+  
+  }
 }
+
+allprojects {
+  apply plugin: 'eclipse'
+  apply plugin: 'idea'
+}
+
+configure(subprojects) {
+  apply plugin: 'java-library'
+  sourceCompatibility = 11
+  compileJava {
+    options.incremental = true
+  }
+}
+
+subprojects {
+  version = '1.0.0'
+  ext.appName = 'Tut3D'
+  repositories {
+    mavenCentral()
+    maven { url 'https://s01.oss.sonatype.org' }
+    // You may want to remove the following line if you have errors downloading dependencies.
+    // mavenLocal()
+    // gradlePluginPortal()
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://s01.oss.sonatype.org/content/repositories/snapshots/' }
+    maven { url 'https://jitpack.io' }
+    maven { url 'https://teavm.org/maven/repository/' }
+  }
+}
+
+eclipse.project.name = 'Tut3D' + '-parent'
